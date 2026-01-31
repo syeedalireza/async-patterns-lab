@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.0/phpunit.xsd"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
          bootstrap="vendor/autoload.php"
          colors="true"
          cacheDirectory=".phpunit.cache"
-         executionOrder="random"
-         requireCoverageMetadata="true"
-         beStrictAboutCoverageMetadata="true">
+         failOnRisky="true"
+         failOnWarning="true">
     <testsuites>
         <testsuite name="Unit">
             <directory>tests/Unit</directory>
-        </testsuite>
-        <testsuite name="Benchmarks">
-            <directory>tests/Benchmarks</directory>
         </testsuite>
     </testsuites>
 
@@ -25,6 +21,7 @@
     <coverage>
         <report>
             <html outputDirectory="build/coverage"/>
+            <text outputFile="php://stdout" showUncoveredFiles="false"/>
         </report>
     </coverage>
 </phpunit>

@@ -1,19 +1,36 @@
 name: CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   tests:
     runs-on: ubuntu-latest
+    
     strategy:
       matrix:
         php: ['8.2', '8.3']
+    
+    name: PHP ${{ matrix.php }} Tests
+    
     steps:
       - uses: actions/checkout@v4
-      - uses: shivammathur/setup-php@v2
+      
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          extensions: json, mbstring, fibers
-      - run: composer install
-      - run: composer test
-      - run: composer phpstan
+          extensions: json
+          coverage: xdebug
+      
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
+      
+      - name: Run tests
+        run: ./vendor/bin/phpunit --coverage-text
+      
+      - name: Run PHPStan
+        run: ./vendor/bin/phpstan analyse

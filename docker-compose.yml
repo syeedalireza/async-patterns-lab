@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  php:
+    build: .
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: php -a
+    
+  tests:
+    build: .
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: composer test

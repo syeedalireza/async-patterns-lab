@@ -3,3 +3,9 @@ parameters:
     paths:
         - src
         - tests
+    excludePaths:
+        - tests/bootstrap.php
+    phpVersion: 80200
+    checkMissingIterableValueType: true
+    checkGenericClassInNonGenericObjectType: true
+    reportUnmatchedIgnoredErrors: true
